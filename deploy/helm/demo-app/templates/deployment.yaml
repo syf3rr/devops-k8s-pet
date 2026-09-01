@@ -30,6 +30,13 @@ spec:
                 secretKeyRef:
                   name: demo-app-postgres-secret
                   key: postgres-password
+          volumeMounts:
+            - name: postgres-init-script
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: postgres-init-script
+          configMap:
+            name: {{ .Release.Name }}-postgres-init-cm
 
 ---
 
@@ -53,26 +60,21 @@ spec:
           ports:
             - containerPort: {{ .Values.backend.port }}
           env:
-            # 1. Вказуємо ім'я K8s Service для PostgreSQL
             - name: DB_HOST
               value: "{{ .Release.Name }}-postgres-svc"
             
-            # 2. Порт бази
             - name: DB_PORT
               value: {{ .Values.postgres.port | quote }}
             
-            # 3. Назва бази даних з values.yaml
             - name: DB_NAME
               value: {{ .Values.postgres.dbName | quote }}
             
-            # 4. Користувач із Secret
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   name: demo-app-postgres-secret
                   key: postgres-user
             
-            # 5. Пароль із Secret
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
