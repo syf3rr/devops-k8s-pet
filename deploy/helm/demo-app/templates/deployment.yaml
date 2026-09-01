@@ -65,10 +65,6 @@ spec:
                   key: postgres-password
             - name: DATABASE_URL
               value: "postgresql://postgres:mysecretpassword@{{ .Release.Name }}-postgres-svc:5432/{{ .Values.postgres.dbName }}?schema=public"
-              valueFrom:
-                secretKeyRef:
-                  name: demo-app-postgres-secret
-                  key: postgres-password
 
 ---
 
