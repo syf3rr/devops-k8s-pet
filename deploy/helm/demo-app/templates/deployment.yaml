@@ -60,26 +60,29 @@ spec:
           ports:
             - containerPort: {{ .Values.backend.port }}
           env:
+            - name: PORT
+              value: {{ .Values.backend.port | quote }}
             - name: DB_HOST
               value: "{{ .Release.Name }}-postgres-svc"
-            
             - name: DB_PORT
               value: {{ .Values.postgres.port | quote }}
-            
             - name: DB_NAME
               value: {{ .Values.postgres.dbName | quote }}
-            
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   name: demo-app-postgres-secret
                   key: postgres-user
-            
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: demo-app-postgres-secret
                   key: postgres-password
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: demo-app-backend-secret
+                  key: jwt-secret
 
 ---
 
