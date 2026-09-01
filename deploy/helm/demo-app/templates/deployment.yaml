@@ -1,33 +1,70 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-mongo
+  name: {{ .Release.Name }}-postgres
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-mongo
+      app: {{ .Release.Name }}-postgres
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-mongo
+        app: {{ .Release.Name }}-postgres
     spec:
       containers:
-        - name: mongo
-          image: "{{ .Values.mongo.image.repository }}:{{ .Values.mongo.image.tag }}"
+        - name: postgres
+          image: "{{ .Values.postgres.image.repository }}:{{ .Values.postgres.image.tag }}"
           ports:
-            - containerPort: {{ .Values.mongo.port }}
+            - containerPort: {{ .Values.postgres.port }}
           env:
-            - name: MONGO_INITDB_ROOT_USERNAME
+            - name: POSTGRES_DB
+              value: {{ .Values.postgres.dbName }}
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: demo-app-mongo-secret
-                  key: mongo-root-username
-            - name: MONGO_INITDB_ROOT_PASSWORD
+                  name: demo-app-postgres-secret
+                  key: postgres-user
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: demo-app-mongo-secret
-                  key: mongo-root-password
+                  name: demo-app-postgres-secret
+                  key: postgres-password
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-backend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-backend
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-backend
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.backend.port }}
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@{{ .Release.Name }}-postgres-svc:5432/{{ .Values.postgres.dbName }}?schema=public"
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: demo-app-postgres-secret
+                  key: postgres-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: demo-app-postgres-secret
+                  key: postgres-password
 
 ---
 

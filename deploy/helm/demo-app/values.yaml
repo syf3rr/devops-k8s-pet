@@ -1,16 +1,23 @@
 replicaCount: 1
 
-mongo:
-  image:
-    repository: mongo
-    tag: 6.0
-  port: 27017
-
 frontend:
   image:
-    repository: nginx
-    tag: alpine
+    repository: ghcr.io/syf3rr/devops-k8s-pet-frontend
+    tag: latest
   port: 80
+
+backend:
+  image:
+    repository: ghcr.io/syf3rr/devops-k8s-pet-backend
+    tag: latest
+  port: 5000
+
+postgres:
+  image:
+    repository: postgres
+    tag: 15-alpine
+  port: 5432
+  dbName: auth_db
 
 ingress:
   enable: true
