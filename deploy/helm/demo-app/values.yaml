@@ -1,0 +1,17 @@
+replicaCount: 1
+
+mongo:
+  image:
+    repository: mongo
+    tag: 6.0
+  port: 27017
+
+frontend:
+  image:
+    repository: nginx
+    tag: alpine
+  port: 80
+
+ingress:
+  enable: true
+  host: demo-app.local
