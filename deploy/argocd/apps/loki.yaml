@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/syf3rr/devops-k8s-pet.git'
     targetRevision: HEAD
-    path: helm/monitoring 
+    path: deploy/helm/monitoring 
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
