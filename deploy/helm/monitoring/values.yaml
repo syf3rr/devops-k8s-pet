@@ -1,8 +1,10 @@
-loki:
-  persistence:
+loki-stack:
+  loki:
     enabled: true
-    size: 10Gi
-promtail:
-  enabled: true
-grafana:
-  enabled: false
+    persistence:
+      enabled: true
+      size: 10Gi
+  promtail:
+    enabled: true
+  grafana:
+    enabled: false
