@@ -8,10 +8,4 @@ loki-stack:
     enabled: true
   grafana:
     enabled: false
-    additionalDataSources:
-    - name: Loki
-      type: loki
-      access: proxy
-      url: http://loki-stack:3100
-      jsonData:
-        maxLines: 1000
+  
