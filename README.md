@@ -17,8 +17,8 @@ An end-to-end DevOps project demonstrating GitOps principles, container orchestr
 ## 🔒 Security & Secrets Management
 
 To adhere to DevSecOps best practices, no unencrypted sensitive data is stored in the Git repository:
-- All sensitive environment variables (PostgreSQL credentials, JWT secrets) are encrypted using **Bitnami Sealed Secrets**.
-- The **SealedSecret** resources are safely committed to Git and decrypted at runtime inside the cluster by the **sealed-secrets-controller** using private key pairs.
+- All sensitive environment variables (PostgreSQL credentials, JWT secrets) are encrypted using `Bitnami Sealed Secrets`.
+- The `SealedSecret` resources are safely committed to Git and decrypted at runtime inside the cluster by the `sealed-secrets-controller` using private key pairs.
 
 ---
 
