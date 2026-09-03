@@ -51,7 +51,7 @@ To adhere to DevSecOps best practices, no unencrypted sensitive data is stored i
 Before starting, ensure you have the following installed and configured:
 
 * **Kubernetes cluster** (Minikube / k3s / Kind / MicroK8s)
-* **kubectl** & **helm** CLI
+* **kubectl**, **helm** & **kubeseal** CLI
 * **ArgoCD** deployed in the cluster
 
 ---
