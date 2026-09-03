@@ -28,33 +28,16 @@ To adhere to DevSecOps best practices, no unencrypted sensitive data is stored i
 .
 ├── .github/
 │   └── workflows/          # GitHub Actions CI/CD pipelines
-│       ├── app-ci-cd.yaml
-│       └── terraform.yaml
-├── backend/                # Express.js API application
-├── deploy/                 # GitOps and Kubernetes deployment manifests
+├── backend/                # Express.js API
+├── deploy/                 # GitOps and Kubernetes deployment configs
 │   ├── argocd/             # ArgoCD manifests (App-of-Apps pattern)
-│   │   ├── apps/           # Child applications (demo-app, ingress, monitoring, sealed-secrets)
-│   │   │   ├── demo-app.yaml
-│   │   │   ├── ingress-nginx.yaml
-│   │   │   ├── loki.yaml
-│   │   │   ├── prometheus.yaml
-│   │   │   └── sealed-secrets.yaml
-│   │   └── root-app.yaml   # Root App-of-Apps manifest
-│   └── helm/               # Helm charts for Kubernetes deployments
-│       ├── demo-app/       # Helm chart for PERN stack (Deployments, Ingress, Secrets)
-│       │   ├── templates/
-│       │   ├── Chart.yaml
-│       │   ├── init.sql
-│       │   └── values.yaml
-│       └── monitoring/     # Helm chart for monitoring stack
-│           ├── Chart.yaml
-│           └── values.yaml
-├── frontend/               # React SPA application
-├── terraform/              # Infrastructure as Code (IaC) provisioning
-│   ├── main.tf
-│   ├── outputs.tf
-│   └── variables.tf
-├── docker-compose.yaml      # Local development environment configuration
+│   │   └── apps/           # Child application manifests
+│   └── helm/               # Helm charts for services
+│       ├── demo-app/       # Main application Helm chart (PERN stack)
+│       └── monitoring/     # Monitoring stack Helm chart
+├── frontend/               # React SPA
+├── terraform/              # Infrastructure as Code (IaC) scripts
+├── docker-compose.yaml     # Local development environment
 └── README.md
 
 ```
