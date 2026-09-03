@@ -9,6 +9,7 @@ An end-to-end DevOps project demonstrating GitOps principles, container orchestr
 - **Packaging & Templating**: Helm 3
 - **Secrets Management**: Bitnami Sealed Secrets (Asymmetric Encryption in Git)
 - **Observability**: Prometheus & Loki (Metrics & Log Aggregation)
+- **Ingress / Reverse Proxy:** Nginx Ingress Controller
 - **Infrastructure as Code**: Terraform
 - **Database**: PostgreSQL with persistent storage
 
