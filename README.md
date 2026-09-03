@@ -1,4 +1,4 @@
-# PERN Stack Production-Ready Kubernetes Deployment 🚀
+# PERN Stack Kubernetes Deployment 🚀
 
 An end-to-end DevOps project demonstrating GitOps principles, container orchestration, and secure secrets management for a full-stack PERN (PostgreSQL, Express, React, Node.js) application.
 
@@ -22,7 +22,7 @@ To adhere to DevSecOps best practices, no unencrypted sensitive data is stored i
 
 ---
 
-## 🚀 Repository Structure & GitOps Layout
+## 📁 Repository Structure & GitOps Layout
 
 ```text
 .
